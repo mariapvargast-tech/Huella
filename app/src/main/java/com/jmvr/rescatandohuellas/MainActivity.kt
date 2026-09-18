@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Navegador(
-                        url = "https://www.lowshopping.com",
+                        url = "https://www.google.com",
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(innerPadding)

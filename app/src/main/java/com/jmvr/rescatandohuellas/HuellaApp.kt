@@ -47,6 +47,7 @@ import com.jmvr.rescatandohuellas.navigation.HuellaDestination
 import com.jmvr.rescatandohuellas.state.rememberHuellaAppState
 import com.jmvr.rescatandohuellas.ui.components.PlaceholderScreen
 import com.jmvr.rescatandohuellas.ui.components.mostrarProximaEntrega
+import com.jmvr.rescatandohuellas.ui.home.RescatesScreen
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -176,9 +177,9 @@ fun HuellaApp() {
             }
         ) { innerPadding ->
             when (appState.destino) {
-                HuellaDestination.RESCATES -> PlaceholderScreen(
-                    titulo = "Rescates",
-                    descripcion = "La pantalla de inicio llega en el próximo PR.",
+                HuellaDestination.RESCATES -> RescatesScreen(
+                    emergenciaActiva = appState.emergenciaActiva,
+                    onIrAMapa = { appState.irA(HuellaDestination.MAPA) },
                     modifier = Modifier.padding(innerPadding)
                 )
                 HuellaDestination.MAPA -> PlaceholderScreen(

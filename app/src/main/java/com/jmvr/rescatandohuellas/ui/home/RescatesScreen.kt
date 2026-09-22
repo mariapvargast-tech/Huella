@@ -37,6 +37,7 @@ import com.jmvr.rescatandohuellas.ui.theme.HuellaOrange
 fun RescatesScreen(
     emergenciaActiva: Boolean,
     onIrAMapa: () -> Unit,
+    onIrAReportar: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -54,7 +55,7 @@ fun RescatesScreen(
             Text("Acciones rápidas", fontWeight = FontWeight.SemiBold, style = MaterialTheme.typography.titleMedium)
         }
         item {
-            AccionesRapidas(onIrAMapa)
+            AccionesRapidas(onIrAMapa, onIrAReportar)
         }
 
         item {
@@ -134,11 +135,11 @@ private fun EmergenciaBanner(emergenciaActiva: Boolean) {
 }
 
 @Composable
-private fun AccionesRapidas(onIrAMapa: () -> Unit) {
+private fun AccionesRapidas(onIrAMapa: () -> Unit, onIrAReportar: () -> Unit) {
     val context = LocalContext.current
     Row(horizontalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.fillMaxWidth()) {
         Button(
-            onClick = { context.mostrarProximaEntrega() },
+            onClick = onIrAReportar,
             colors = ButtonDefaults.buttonColors(containerColor = HuellaOrange),
             modifier = Modifier.weight(1f)
         ) { Text("Reportar") }

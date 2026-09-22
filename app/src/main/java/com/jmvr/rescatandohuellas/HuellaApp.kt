@@ -48,6 +48,7 @@ import com.jmvr.rescatandohuellas.state.rememberHuellaAppState
 import com.jmvr.rescatandohuellas.ui.components.PlaceholderScreen
 import com.jmvr.rescatandohuellas.ui.components.mostrarProximaEntrega
 import com.jmvr.rescatandohuellas.ui.home.RescatesScreen
+import com.jmvr.rescatandohuellas.ui.report.ReportFlowScreen
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,7 +95,7 @@ fun HuellaApp() {
                         label = { Text("Reportar") },
                         selected = false,
                         onClick = {
-                            context.mostrarProximaEntrega()
+                            appState.abrirReportar()
                             scope.launch { drawerState.close() }
                         },
                         icon = { Icon(Icons.Default.Warning, contentDescription = null) }
@@ -176,32 +177,40 @@ fun HuellaApp() {
                 }
             }
         ) { innerPadding ->
-            when (appState.destino) {
-                HuellaDestination.RESCATES -> RescatesScreen(
-                    emergenciaActiva = appState.emergenciaActiva,
-                    onIrAMapa = { appState.irA(HuellaDestination.MAPA) },
+            if (appState.reportando) {
+                ReportFlowScreen(
+                    onFinalizar = { appState.cerrarReportar() },
                     modifier = Modifier.padding(innerPadding)
                 )
-                HuellaDestination.MAPA -> PlaceholderScreen(
-                    titulo = "Mapa",
-                    descripcion = "Disponible en la próxima entrega.",
-                    modifier = Modifier.padding(innerPadding)
-                )
-                HuellaDestination.ADOPCION -> PlaceholderScreen(
-                    titulo = "Adopción",
-                    descripcion = "Disponible en la próxima entrega.",
-                    modifier = Modifier.padding(innerPadding)
-                )
-                HuellaDestination.COMUNIDAD -> PlaceholderScreen(
-                    titulo = "Comunidad",
-                    descripcion = "Disponible en la próxima entrega.",
-                    modifier = Modifier.padding(innerPadding)
-                )
-                HuellaDestination.PERFIL -> PlaceholderScreen(
-                    titulo = "Perfil",
-                    descripcion = "Disponible en la próxima entrega.",
-                    modifier = Modifier.padding(innerPadding)
-                )
+            } else {
+                when (appState.destino) {
+                    HuellaDestination.RESCATES -> RescatesScreen(
+                        emergenciaActiva = appState.emergenciaActiva,
+                        onIrAMapa = { appState.irA(HuellaDestination.MAPA) },
+                        onIrAReportar = { appState.abrirReportar() },
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                    HuellaDestination.MAPA -> PlaceholderScreen(
+                        titulo = "Mapa",
+                        descripcion = "Disponible en la próxima entrega.",
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                    HuellaDestination.ADOPCION -> PlaceholderScreen(
+                        titulo = "Adopción",
+                        descripcion = "Disponible en la próxima entrega.",
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                    HuellaDestination.COMUNIDAD -> PlaceholderScreen(
+                        titulo = "Comunidad",
+                        descripcion = "Disponible en la próxima entrega.",
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                    HuellaDestination.PERFIL -> PlaceholderScreen(
+                        titulo = "Perfil",
+                        descripcion = "Disponible en la próxima entrega.",
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
             }
         }
     }

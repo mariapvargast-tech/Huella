@@ -11,9 +11,20 @@ class HuellaAppState {
     var destino by mutableStateOf(HuellaDestination.RESCATES)
         private set
     var emergenciaActiva by mutableStateOf(true)
+    var reportando by mutableStateOf(false)
+        private set
 
     fun irA(destino: HuellaDestination) {
         this.destino = destino
+        this.reportando = false
+    }
+
+    fun abrirReportar() {
+        reportando = true
+    }
+
+    fun cerrarReportar() {
+        reportando = false
     }
 }
 

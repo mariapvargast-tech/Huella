@@ -2,7 +2,6 @@ package com.jmvr.rescatandohuellas.data
 
 object SampleData {
     val estadoZona = EstadoZona(
-        emergenciaActiva = true,
         nombreEmergencia = "Inundaciones — Valle de Aburrá",
         zona = "Laureles",
         tiempoActivacion = "hace 5 min"

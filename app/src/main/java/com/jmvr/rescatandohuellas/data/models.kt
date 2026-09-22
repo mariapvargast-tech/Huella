@@ -36,7 +36,6 @@ data class Estadisticas(
 )
 
 data class EstadoZona(
-    val emergenciaActiva: Boolean,
     val nombreEmergencia: String,
     val zona: String,
     val tiempoActivacion: String

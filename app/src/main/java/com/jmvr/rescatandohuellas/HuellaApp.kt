@@ -127,13 +127,19 @@ fun HuellaApp() {
                     NavigationDrawerItem(
                         label = { Text("Configuración") },
                         selected = false,
-                        onClick = { context.mostrarProximaEntrega() },
+                        onClick = {
+                            context.mostrarProximaEntrega()
+                            scope.launch { drawerState.close() }
+                        },
                         icon = { Icon(Icons.Default.Settings, contentDescription = null) }
                     )
                     NavigationDrawerItem(
                         label = { Text("Cerrar sesión") },
                         selected = false,
-                        onClick = { context.mostrarProximaEntrega() },
+                        onClick = {
+                            context.mostrarProximaEntrega()
+                            scope.launch { drawerState.close() }
+                        },
                         icon = { Icon(Icons.Default.Logout, contentDescription = null) }
                     )
                 }
@@ -162,7 +168,7 @@ fun HuellaApp() {
                         NavigationBarItem(
                             selected = appState.destino == destino,
                             onClick = { appState.irA(destino) },
-                            icon = { Icon(destino.icono, contentDescription = destino.etiqueta) },
+                            icon = { Icon(destino.icono, contentDescription = null) },
                             label = { Text(destino.etiqueta) }
                         )
                     }

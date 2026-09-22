@@ -63,6 +63,15 @@ reconcilian ambas fuentes.
 - **Fase de esta entrega**: solo Fase 1 (navegación + Rescates/Home +
   Reportar + base visual). Comunidad, Perfil y Adopción quedan como
   placeholders funcionales pero simples.
+- **Acciones no implementadas**: cualquier botón, tarjeta o ítem de navegación
+  que apunte a algo fuera de alcance de esta entrega (Adopción real, Red de
+  ayuda dedicada, cámara/GPS reales, notificaciones, cerrar sesión real,
+  configuración, etc.) debe mostrar un `Toast` con un mensaje como
+  "Disponible en la próxima entrega" en vez de no hacer nada o estar
+  deshabilitado sin explicación.
+- **Entrega incremental**: la implementación se divide en un PR por
+  pantalla/feature (ver plan de implementación) en vez de un solo PR con todo
+  el alcance, para permitir revisión de código en cada paso.
 
 ## Arquitectura
 

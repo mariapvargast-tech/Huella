@@ -26,6 +26,8 @@ import androidx.compose.ui.unit.dp
 import com.jmvr.rescatandohuellas.state.PASO_CONFIRMACION
 import com.jmvr.rescatandohuellas.state.PASO_DATOS
 import com.jmvr.rescatandohuellas.state.PASO_TIPO
+import com.jmvr.rescatandohuellas.state.puedeAvanzarDesdeDatos
+import com.jmvr.rescatandohuellas.state.puedeAvanzarDesdeTipo
 import com.jmvr.rescatandohuellas.state.rememberReportFlowManager
 import com.jmvr.rescatandohuellas.ui.theme.HuellaOrange
 
@@ -40,17 +42,19 @@ fun ReportFlowScreen(onFinalizar: () -> Unit, modifier: Modifier = Modifier) {
             .padding(16.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(
-                modifier = Modifier
-                    .size(36.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.surfaceVariant)
-                    .clickable {
-                        if (!manager.retroceder()) onFinalizar()
-                    },
-                contentAlignment = Alignment.Center
-            ) { Text("‹") }
-            Spacer(modifier = Modifier.size(12.dp))
+            if (manager.paso != PASO_CONFIRMACION) {
+                Box(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                        .clickable {
+                            if (!manager.retroceder()) onFinalizar()
+                        },
+                    contentAlignment = Alignment.Center
+                ) { Text("‹") }
+                Spacer(modifier = Modifier.size(12.dp))
+            }
             Text(
                 when (manager.paso) {
                     PASO_TIPO -> "¿Qué ocurrió?"
@@ -87,8 +91,14 @@ fun ReportFlowScreen(onFinalizar: () -> Unit, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.weight(1f))
 
         if (manager.paso != PASO_CONFIRMACION) {
+            val puedeAvanzar = when (manager.paso) {
+                PASO_TIPO -> puedeAvanzarDesdeTipo(manager.form)
+                PASO_DATOS -> puedeAvanzarDesdeDatos(manager.form)
+                else -> true
+            }
             Button(
                 onClick = { manager.avanzar() },
+                enabled = puedeAvanzar,
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = HuellaOrange)
             ) {

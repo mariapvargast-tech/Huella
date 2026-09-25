@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rescatando Huellas</title>
+<style>
+  :root {
+    --orange: #F2762E;
+    --orange-dark: #C25A17;
+    --coral: #D93A4E;
+    --green: #12A08A;
+    --purple: #6E56CF;
+    --slate: #45607F;
+    --bg: #F3F5F7;
+    --surface: #FFFFFF;
+    --muted: #5A6070;
+    --text: #171A20;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, Roboto, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--orange), var(--coral));
+    color: #fff;
+    padding: 32px 20px 40px;
+    text-align: center;
+  }
+  .hero .badge {
+    display: inline-block;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    line-height: 56px;
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .hero h1 { margin: 0 0 6px; font-size: 24px; }
+  .hero p { margin: 0; opacity: 0.9; font-size: 14px; }
+  .content { padding: 20px; }
+  section { margin-bottom: 28px; }
+  h2 { font-size: 16px; color: var(--slate); margin-bottom: 10px; }
+  .synopsis { color: var(--muted); font-size: 14px; }
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .feature {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  }
+  .feature .icon { font-size: 20px; }
+  .feature h3 { font-size: 13px; margin: 6px 0 4px; }
+  .feature p { font-size: 12px; color: var(--muted); margin: 0; }
+  .feature.emergencia { border-left: 3px solid var(--coral); }
+  .feature.mapa { border-left: 3px solid var(--slate); }
+  .feature.comunidad { border-left: 3px solid var(--purple); }
+  .feature.adopcion { border-left: 3px solid var(--green); }
+  .team {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .team ul { margin: 0; padding-left: 18px; font-size: 13px; color: var(--muted); }
+  .team li { margin-bottom: 4px; }
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 12px 20px 24px;
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="badge">🐾</div>
+    <h1>Rescatando Huellas</h1>
+    <p>Rescate, localización y adopción de mascotas, incluso en emergencias</p>
+  </div>
+
+  <div class="content">
+    <section>
+      <h2>Sobre el proyecto</h2>
+      <p class="synopsis">
+        Rescatando Huellas facilita el reporte, la localización y el seguimiento de mascotas
+        perdidas, encontradas o en situación de riesgo. Ante emergencias como terremotos o
+        inundaciones, activa un modo especial que prioriza los casos de las zonas afectadas
+        y conecta a la comunidad con refugios, veterinarias y voluntarios cercanos.
+      </p>
+    </section>
+
+    <section>
+      <h2>Lo que puedes hacer</h2>
+      <div class="features">
+        <div class="feature emergencia">
+          <div class="icon">🚨</div>
+          <h3>Modo emergencia</h3>
+          <p>Prioriza reportes y ayuda en zonas afectadas.</p>
+        </div>
+        <div class="feature mapa">
+          <div class="icon">📍</div>
+          <h3>Mapa y red de ayuda</h3>
+          <p>Refugios, veterinarias y voluntarios cercanos.</p>
+        </div>
+        <div class="feature comunidad">
+          <div class="icon">🤝</div>
+          <h3>Comunidad</h3>
+          <p>Avistamientos y seguimiento compartido.</p>
+        </div>
+        <div class="feature adopcion">
+          <div class="icon">🐶</div>
+          <h3>Adopción</h3>
+          <p>Conecta animales en adopción con nuevas familias.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Equipo</h2>
+      <div class="team">
+        <ul>
+          <li>María Paula Vargas Torres</li>
+          <li>José Miguel Vélez Ramírez</li>
+          <li>Jonathan Franco Santana</li>
+          <li>Edinson Hernández Cubillos</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <footer>Politécnico Grancolombiano — Gerencia de Proyectos Informáticos</footer>
+</body>
+</html>

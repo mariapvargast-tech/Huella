@@ -15,18 +15,31 @@ class HuellaAppState {
     var reportando by mutableStateOf(false)
         private set
     val mapaReportes = MapaReportesManager(SampleData.reportesMapa)
+    var mostrandoAcercaDe by mutableStateOf(false)
+        private set
 
     fun irA(destino: HuellaDestination) {
         this.destino = destino
         this.reportando = false
+        this.mostrandoAcercaDe = false
     }
 
     fun abrirReportar() {
         reportando = true
+        mostrandoAcercaDe = false
     }
 
     fun cerrarReportar() {
         reportando = false
+    }
+
+    fun abrirAcercaDe() {
+        mostrandoAcercaDe = true
+        reportando = false
+    }
+
+    fun cerrarAcercaDe() {
+        mostrandoAcercaDe = false
     }
 }
 

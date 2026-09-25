@@ -64,6 +64,7 @@ fun HuellaApp() {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
+        gesturesEnabled = drawerState.isOpen || appState.destino != HuellaDestination.MAPA,
         drawerContent = {
             ModalDrawerSheet {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -193,7 +194,10 @@ fun HuellaApp() {
                         onIrAReportar = { appState.abrirReportar() },
                         modifier = Modifier.padding(innerPadding)
                     )
-                    HuellaDestination.MAPA -> MapScreen(modifier = Modifier.padding(innerPadding))
+                    HuellaDestination.MAPA -> MapScreen(
+                        mapa = appState.mapaReportes,
+                        modifier = Modifier.padding(innerPadding)
+                    )
                     HuellaDestination.ADOPCION -> AdopcionScreen(modifier = Modifier.padding(innerPadding))
                     HuellaDestination.COMUNIDAD -> CommunityScreen(modifier = Modifier.padding(innerPadding))
                     HuellaDestination.PERFIL -> ProfileScreen(modifier = Modifier.padding(innerPadding))

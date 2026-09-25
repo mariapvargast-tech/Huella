@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.jmvr.rescatandohuellas.data.SampleData
 import com.jmvr.rescatandohuellas.navigation.HuellaDestination
 
 class HuellaAppState {
@@ -13,6 +14,7 @@ class HuellaAppState {
     var emergenciaActiva by mutableStateOf(true)
     var reportando by mutableStateOf(false)
         private set
+    val mapaReportes = MapaReportesManager(SampleData.reportesMapa)
 
     fun irA(destino: HuellaDestination) {
         this.destino = destino

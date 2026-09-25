@@ -29,6 +29,16 @@ data class PuntoAyuda(
     val detalle: String
 )
 
+data class ReporteMapa(
+    val id: Int,
+    val tipo: TipoReporte,
+    val titulo: String,
+    val detalle: String,
+    val latitud: Double,
+    val longitud: Double,
+    val tiempo: String
+)
+
 data class Estadisticas(
     val reportadas: Int,
     val reencontradas: Int,

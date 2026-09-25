@@ -44,6 +44,63 @@ object SampleData {
         Avistamiento("Nube volvió con su familia", "Reportada ayer en Belén", "hace 1 h")
     )
 
+    val reportesMapa = listOf(
+        ReporteMapa(
+            id = 1,
+            tipo = TipoReporte.RIESGO,
+            titulo = "Gato herido",
+            detalle = "Bajo un carro, Av. 33 con 74",
+            latitud = 6.2447,
+            longitud = -75.5905,
+            tiempo = "hace 8 min"
+        ),
+        ReporteMapa(
+            id = 2,
+            tipo = TipoReporte.PERDIDA,
+            titulo = "Rocky",
+            detalle = "Golden, collar azul — visto por última vez en Laureles",
+            latitud = 6.2455,
+            longitud = -75.5960,
+            tiempo = "hace 25 min"
+        ),
+        ReporteMapa(
+            id = 3,
+            tipo = TipoReporte.ENCONTRADA,
+            titulo = "Perrita criolla",
+            detalle = "Café con manchas blancas, está en un hogar de paso",
+            latitud = 6.2528,
+            longitud = -75.5880,
+            tiempo = "hace 40 min"
+        ),
+        ReporteMapa(
+            id = 4,
+            tipo = TipoReporte.PERDIDA,
+            titulo = "Michi",
+            detalle = "Gato gris atigrado, collar rojo",
+            latitud = 6.2310,
+            longitud = -75.6040,
+            tiempo = "hace 1 h"
+        ),
+        ReporteMapa(
+            id = 5,
+            tipo = TipoReporte.RIESGO,
+            titulo = "Perro atrapado",
+            detalle = "Atrapado por el agua cerca de la quebrada",
+            latitud = 6.2390,
+            longitud = -75.5820,
+            tiempo = "hace 1 h"
+        ),
+        ReporteMapa(
+            id = 6,
+            tipo = TipoReporte.ENCONTRADA,
+            titulo = "Loro encontrado",
+            detalle = "Verde, muy manso, en la estación Estadio",
+            latitud = 6.2530,
+            longitud = -75.5760,
+            tiempo = "hace 2 h"
+        )
+    )
+
     val puntosAyuda = listOf(
         PuntoAyuda("Clínica San Joaquín", "Veterinaria", 1.2, "Atiende heridos ahora"),
         PuntoAyuda("Hogar de paso Laureles", "Refugio", 2.4, "12 cupos disponibles"),

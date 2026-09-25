@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
@@ -45,6 +46,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.jmvr.rescatandohuellas.navigation.HuellaDestination
 import com.jmvr.rescatandohuellas.state.rememberHuellaAppState
+import com.jmvr.rescatandohuellas.ui.about.AboutScreen
 import com.jmvr.rescatandohuellas.ui.components.PlaceholderScreen
 import com.jmvr.rescatandohuellas.ui.components.mostrarProximaEntrega
 import com.jmvr.rescatandohuellas.ui.home.RescatesScreen
@@ -99,6 +101,15 @@ fun HuellaApp() {
                             scope.launch { drawerState.close() }
                         },
                         icon = { Icon(Icons.Default.Warning, contentDescription = null) }
+                    )
+                    NavigationDrawerItem(
+                        label = { Text("Acerca de") },
+                        selected = false,
+                        onClick = {
+                            appState.abrirAcercaDe()
+                            scope.launch { drawerState.close() }
+                        },
+                        icon = { Icon(Icons.Default.Info, contentDescription = null) }
                     )
                     NavigationDrawerItem(
                         label = { Text("Red de ayuda") },
@@ -180,6 +191,11 @@ fun HuellaApp() {
             if (appState.reportando) {
                 ReportFlowScreen(
                     onFinalizar = { appState.cerrarReportar() },
+                    modifier = Modifier.padding(innerPadding)
+                )
+            } else if (appState.mostrandoAcercaDe) {
+                AboutScreen(
+                    onCerrar = { appState.cerrarAcercaDe() },
                     modifier = Modifier.padding(innerPadding)
                 )
             } else {

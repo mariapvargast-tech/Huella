@@ -1,5 +1,7 @@
 package com.jmvr.rescatandohuellas.ui.about
 
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.background
@@ -48,10 +50,26 @@ fun AboutScreen(onCerrar: () -> Unit, modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxSize(),
             factory = { context ->
                 WebView(context).apply {
-                    webViewClient = WebViewClient()
-                    loadUrl("file:///android_asset/landing.html")
+                    webViewClient = object : WebViewClient() {
+                        private var fallaronCargas = false
+
+                        override fun onReceivedError(
+                            view: WebView,
+                            request: WebResourceRequest,
+                            error: WebResourceError
+                        ) {
+                            if (request.isForMainFrame && !fallaronCargas) {
+                                fallaronCargas = true
+                                view.loadUrl(URL_LANDING_OFFLINE)
+                            }
+                        }
+                    }
+                    loadUrl(URL_LANDING)
                 }
             }
         )
     }
 }
+
+private const val URL_LANDING = "https://mariapvargast-tech.github.io/Huella/"
+private const val URL_LANDING_OFFLINE = "file:///android_asset/landing.html"

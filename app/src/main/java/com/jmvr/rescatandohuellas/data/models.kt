@@ -1,5 +1,7 @@
 package com.jmvr.rescatandohuellas.data
 
+import androidx.annotation.DrawableRes
+
 enum class TipoMascota { PERRO, GATO, OTRO }
 
 enum class EstadoMascota { EN_BUSQUEDA, AVISTADA, EN_REFUGIO, REENCONTRADA }
@@ -49,4 +51,20 @@ data class EstadoZona(
     val nombreEmergencia: String,
     val zona: String,
     val tiempoActivacion: String
+)
+
+data class PerfilPersona(
+    val nombre: String,
+    val rol: String,
+    @DrawableRes val foto: Int,
+    val acercaDe: String,
+    val estudios: String,
+    val experiencia: String
+)
+
+data class FotoGaleria(
+    val id: Int,
+    @DrawableRes val imagen: Int,
+    val titulo: String,
+    val descripcion: String
 )

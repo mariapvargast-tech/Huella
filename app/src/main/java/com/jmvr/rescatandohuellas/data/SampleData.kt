@@ -1,5 +1,7 @@
 package com.jmvr.rescatandohuellas.data
 
+import com.jmvr.rescatandohuellas.R
+
 object SampleData {
     val estadoZona = EstadoZona(
         nombreEmergencia = "Inundaciones — Valle de Aburrá",
@@ -105,5 +107,35 @@ object SampleData {
         PuntoAyuda("Clínica San Joaquín", "Veterinaria", 1.2, "Atiende heridos ahora"),
         PuntoAyuda("Hogar de paso Laureles", "Refugio", 2.4, "12 cupos disponibles"),
         PuntoAyuda("Andrés", "Voluntario", 0.8, "Transporte en moto")
+    )
+
+    val perfil = PerfilPersona(
+        nombre = "María Paula Vargas",
+        rol = "Voluntaria activa · Laureles, Medellín",
+        foto = R.drawable.perfil_persona,
+        acercaDe = "Me uní a Rescatando Huellas para ayudar a que cada mascota perdida vuelva a casa. " +
+            "Coordino avistamientos en Laureles y apoyo el transporte de animales heridos hacia " +
+            "veterinarias aliadas. Creo en la adopción responsable y en el trabajo en red: " +
+            "cuando la comunidad se organiza, los rescates son más rápidos y seguros. " +
+            "En mis tiempos libres acompaño jornadas de esterilización y ferias de adopción.",
+        estudios = "Tecnología en Desarrollo de Software — en curso.\n\n" +
+            "Curso de primeros auxilios veterinarios básicos — Fundación Huellitas, 2025.\n\n" +
+            "Diplomado en bienestar animal y tenencia responsable — 2024.\n\n" +
+            "Bachiller académico — Institución Educativa Laureles, 2022.",
+        experiencia = "Voluntaria de rescate — Rescatando Huellas (2025 – hoy). " +
+            "Atención de reportes de mascotas perdidas y animales en riesgo en Laureles y Belén.\n\n" +
+            "Apoyo en hogar de paso — Hogar de paso Laureles (2024 – 2025). " +
+            "Cuidado temporal de perros y gatos rescatados mientras encontraban familia.\n\n" +
+            "Logística en ferias de adopción — 2023 – 2024. " +
+            "Organización de turnos, registro de adoptantes y seguimiento posadopción."
+    )
+
+    val fotosAdopcion = listOf(
+        FotoGaleria(1, R.drawable.adopcion_perro_canela, "Canela", "Perrita mestiza de 2 años, de pelo rizado color cobre. Dulce, tranquila y acostumbrada a pasear con correa."),
+        FotoGaleria(2, R.drawable.adopcion_perro_toby, "Toby", "Perro pequeño de 3 años, peludo y muy cariñoso. Ideal para apartamento; se lleva bien con niños."),
+        FotoGaleria(3, R.drawable.adopcion_perro_bruno, "Bruno", "Perro adulto mayor de 10 años, rescatado en las inundaciones de Laureles. Calmado y leal; busca un hogar tranquilo para sus últimos años."),
+        FotoGaleria(4, R.drawable.adopcion_gato_oreo, "Oreo", "Gato blanco y negro de 1 año. Juguetón, le encanta dormir al sol y ya está esterilizado."),
+        FotoGaleria(5, R.drawable.adopcion_gato_sombra, "Sombra", "Gata negra de 2 años, de ojos amarillos. Independiente pero cariñosa cuando toma confianza."),
+        FotoGaleria(6, R.drawable.adopcion_gato_pelusa, "Pelusa", "Gatito de 2 meses rescatado en Belén. Necesita un hogar paciente y sus primeras vacunas al día.")
     )
 }

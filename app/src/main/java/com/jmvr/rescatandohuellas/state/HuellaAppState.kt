@@ -17,6 +17,8 @@ class HuellaAppState {
     val mapaReportes = MapaReportesManager(SampleData.reportesMapa)
     var mostrandoAcercaDe by mutableStateOf(false)
         private set
+    // URL del landing en "Acerca de": se conserva mientras la app esté abierta.
+    var urlLanding by mutableStateOf(URL_LANDING_POR_DEFECTO)
 
     fun irA(destino: HuellaDestination) {
         this.destino = destino

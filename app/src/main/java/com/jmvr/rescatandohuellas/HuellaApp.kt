@@ -199,6 +199,8 @@ fun HuellaApp() {
                 )
             } else if (appState.mostrandoAcercaDe) {
                 AboutScreen(
+                    urlCargada = appState.urlLanding,
+                    onCargarUrl = { appState.urlLanding = it },
                     onCerrar = { appState.cerrarAcercaDe() },
                     modifier = Modifier.padding(innerPadding)
                 )

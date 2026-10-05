@@ -32,9 +32,8 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 
-@OptIn(UnstableApi::class)
 @Composable
-fun VideoPlayer(@RawRes videoRes: Int, modifier: Modifier = Modifier) {
+fun rememberVideoPlayer(@RawRes videoRes: Int): ExoPlayer {
     val context = LocalContext.current
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     val player = remember(videoRes) {
@@ -43,10 +42,8 @@ fun VideoPlayer(@RawRes videoRes: Int, modifier: Modifier = Modifier) {
             prepare()
         }
     }
-    var pantallaCompleta by rememberSaveable { mutableStateOf(false) }
-
     DisposableEffect(lifecycle, player) {
-        val observer = LifecycleEventObserver { _, event ->
+       val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_PAUSE) player.pause()
         }
         lifecycle.addObserver(observer)
@@ -54,6 +51,16 @@ fun VideoPlayer(@RawRes videoRes: Int, modifier: Modifier = Modifier) {
             lifecycle.removeObserver(observer)
             player.release()
         }
+    }
+    return player
+}
+
+@Composable
+fun VideoPlayer(player: ExoPlayer, modifier: Modifier = Modifier) {
+    var pantallaCompleta by rememberSaveable { mutableStateOf(false) }
+
+    DisposableEffect(player) {
+        onDispose { player.pause() }
     }
 
     LaunchedEffect(pantallaCompleta) {

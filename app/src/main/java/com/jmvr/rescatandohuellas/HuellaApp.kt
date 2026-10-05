@@ -44,12 +44,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.jmvr.rescatandohuellas.R
 import com.jmvr.rescatandohuellas.navigation.HuellaDestination
 import com.jmvr.rescatandohuellas.state.rememberHuellaAppState
 import com.jmvr.rescatandohuellas.ui.adoption.AdopcionScreen
 import com.jmvr.rescatandohuellas.ui.community.CommunityScreen
 import com.jmvr.rescatandohuellas.ui.about.AboutScreen
 import com.jmvr.rescatandohuellas.ui.components.mostrarProximaEntrega
+import com.jmvr.rescatandohuellas.ui.components.rememberVideoPlayer
 import com.jmvr.rescatandohuellas.ui.home.RescatesScreen
 import com.jmvr.rescatandohuellas.ui.map.MapScreen
 import com.jmvr.rescatandohuellas.ui.profile.ProfileScreen
@@ -60,13 +62,14 @@ import kotlinx.coroutines.launch
 @Composable
 fun HuellaApp() {
     val appState = rememberHuellaAppState()
+    val videoComunidad = rememberVideoPlayer(R.raw.video_comunidad)
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
     ModalNavigationDrawer(
         drawerState = drawerState,
-        gesturesEnabled = drawerState.isOpen || appState.destino != HuellaDestination.MAPA,
+        gesturesEnabled = drawerState.isOpen,
         drawerContent = {
             ModalDrawerSheet {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -217,8 +220,15 @@ fun HuellaApp() {
                         modifier = Modifier.padding(innerPadding)
                     )
                     HuellaDestination.ADOPCION -> AdopcionScreen(modifier = Modifier.padding(innerPadding))
-                    HuellaDestination.COMUNIDAD -> CommunityScreen(modifier = Modifier.padding(innerPadding))
-                    HuellaDestination.PERFIL -> ProfileScreen(modifier = Modifier.padding(innerPadding))
+                    HuellaDestination.COMUNIDAD -> CommunityScreen(
+                        videoPlayer = videoComunidad,
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                    HuellaDestination.PERFIL -> ProfileScreen(
+                        perfil = appState.perfil,
+                        onGuardar = { appState.perfil = it },
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }

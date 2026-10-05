@@ -5,8 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -22,14 +22,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.jmvr.rescatandohuellas.R
+import androidx.media3.exoplayer.ExoPlayer
 import com.jmvr.rescatandohuellas.data.SampleData
 import com.jmvr.rescatandohuellas.ui.components.VideoPlayer
 import com.jmvr.rescatandohuellas.ui.components.mostrarProximaEntrega
 import com.jmvr.rescatandohuellas.ui.theme.HuellaOnSurfaceMuted
 
 @Composable
-fun CommunityScreen(modifier: Modifier = Modifier) {
+fun CommunityScreen(videoPlayer: ExoPlayer, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     Column(
         modifier = modifier
@@ -58,14 +58,14 @@ fun CommunityScreen(modifier: Modifier = Modifier) {
                 )
             }
         }
-        VideoComunidad()
+        VideoComunidad(videoPlayer)
     }
 }
 
 private const val ASPECTO_VIDEO = 376f / 682f
 
 @Composable
-private fun VideoComunidad() {
+private fun VideoComunidad(player: ExoPlayer) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
@@ -79,7 +79,7 @@ private fun VideoComunidad() {
                 contentAlignment = Alignment.Center
             ) {
                 VideoPlayer(
-                    videoRes = R.raw.video_comunidad,
+                    player = player,
                     modifier = Modifier
                         .heightIn(max = 460.dp)
                         .aspectRatio(ASPECTO_VIDEO, matchHeightConstraintsFirst = true)

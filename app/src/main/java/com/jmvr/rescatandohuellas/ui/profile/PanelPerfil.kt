@@ -3,6 +3,7 @@ package com.jmvr.rescatandohuellas.ui.profile
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,11 +11,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -27,11 +29,14 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -151,29 +156,44 @@ private fun FormularioPerfil(
     }
 }
 
-/** Caja de alto fijo: si el texto no cabe, se desplaza dentro de la caja (con barra) en vez de agrandarla. */
+/**
+ * Caja de alto fijo con marco y etiqueta fijos: si el texto no cabe, solo el texto se desplaza por dentro
+ * (con barra) en vez de agrandar la caja.
+ */
 @Composable
 private fun CampoMultilineaConScroll(value: String, onValueChange: (String) -> Unit, etiqueta: String) {
     val scroll = rememberScrollState()
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(ALTO_CAJA_TEXTO)
-            .barraDesplazamiento(scroll, HuellaOnSurfaceMuted)
-            .verticalScroll(scroll)
-    ) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            label = { Text(etiqueta) },
-            minLines = LINEAS_MINIMAS_CAJA,
-            modifier = Modifier.fillMaxWidth().heightIn(min = ALTO_CAJA_TEXTO)
-        )
+    var enfocado by remember { mutableStateOf(false) }
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text(etiqueta, style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(start = 4.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(ALTO_CAJA_TEXTO)
+                .clip(RoundedCornerShape(4.dp))
+                .border(
+                    width = if (enfocado) 2.dp else 1.dp,
+                    color = if (enfocado) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline,
+                    shape = RoundedCornerShape(4.dp)
+                )
+                .barraDesplazamiento(scroll, HuellaOnSurfaceMuted)
+                .verticalScroll(scroll)
+        ) {
+            BasicTextField(
+                value = value,
+                onValueChange = onValueChange,
+                textStyle = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
+                cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 12.dp)
+                    .onFocusChanged { enfocado = it.isFocused }
+            )
+        }
     }
 }
 
 private val ALTO_CAJA_TEXTO = 140.dp
-private const val LINEAS_MINIMAS_CAJA = 4
 
 @Composable
 private fun CampoTextoPerfil(titulo: String, texto: String) {

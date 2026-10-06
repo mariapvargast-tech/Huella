@@ -109,6 +109,17 @@ object SampleData {
         PuntoAyuda("Andrés", "Voluntario", 0.8, "Transporte en moto")
     )
 
+    val recursosAyuda = listOf(
+        RecursoAyuda(1, "Refugio Patitas Felices", CategoriaAyuda.REFUGIO, 2.3, true, "8 espacios disponibles"),
+        RecursoAyuda(2, "Centro de Rescate Norte", CategoriaAyuda.REFUGIO, 4.1, true, "3 espacios disponibles"),
+        RecursoAyuda(3, "Hogar Temporal Animales", CategoriaAyuda.REFUGIO, 5.8, false, "Sin disponibilidad"),
+        RecursoAyuda(4, "Clínica San Joaquín", CategoriaAyuda.VETERINARIA, 1.2, true, "Atiende emergencias 24 h"),
+        RecursoAyuda(5, "Veterinaria Laureles", CategoriaAyuda.VETERINARIA, 3.0, false, "Cerrada hasta las 8:00"),
+        RecursoAyuda(6, "Andrés", CategoriaAyuda.VOLUNTARIO, 0.8, true, "Transporte en moto"),
+        RecursoAyuda(7, "Laura", CategoriaAyuda.VOLUNTARIO, 1.9, true, "Rescate con lazos y jaula"),
+        RecursoAyuda(8, "Punto de acopio UVA La Armonía", CategoriaAyuda.PUNTO_AYUDA, 2.8, true, "Mantas, agua y alimento")
+    )
+
     val perfil = PerfilPersona(
         nombre = "María Paula Vargas",
         rol = "Voluntaria activa · Laureles, Medellín",

@@ -31,6 +31,23 @@ data class PuntoAyuda(
     val detalle: String
 )
 
+enum class CategoriaAyuda(val etiqueta: String) {
+    REFUGIO("Refugios"),
+    VETERINARIA("Veterinarias"),
+    VOLUNTARIO("Voluntarios"),
+    PUNTO_AYUDA("Puntos de ayuda")
+}
+
+/** @param disponible false cuando el lugar no puede recibir más animales (ej. refugio lleno). */
+data class RecursoAyuda(
+    val id: Int,
+    val nombre: String,
+    val categoria: CategoriaAyuda,
+    val distanciaKm: Double,
+    val disponible: Boolean,
+    val detalle: String
+)
+
 data class ReporteMapa(
     val id: Int,
     val tipo: TipoReporte,

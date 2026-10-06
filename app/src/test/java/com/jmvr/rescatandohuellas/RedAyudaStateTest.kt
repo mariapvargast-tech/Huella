@@ -25,6 +25,12 @@ class RedAyudaStateTest {
     }
 
     @Test
+    fun `la busqueda ignora las tildes en ambos sentidos`() {
+        assertEquals(listOf(vet), filtrarRecursosAyuda(todos, CategoriaAyuda.VETERINARIA, "clinica"))
+        assertEquals(listOf(vet), filtrarRecursosAyuda(todos, CategoriaAyuda.VETERINARIA, "CLÍNICA"))
+    }
+
+    @Test
     fun `sin coincidencias devuelve lista vacia`() {
         assertTrue(filtrarRecursosAyuda(todos, CategoriaAyuda.VOLUNTARIO, "").isEmpty())
     }

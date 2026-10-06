@@ -4,10 +4,13 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -132,27 +135,9 @@ private fun FormularioPerfil(
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
         )
-        OutlinedTextField(
-            value = acercaDe,
-            onValueChange = { acercaDe = it },
-            label = { Text("Acerca de mí") },
-            minLines = 3,
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = estudios,
-            onValueChange = { estudios = it },
-            label = { Text("Estudios") },
-            minLines = 3,
-            modifier = Modifier.fillMaxWidth()
-        )
-        OutlinedTextField(
-            value = experiencia,
-            onValueChange = { experiencia = it },
-            label = { Text("Experiencia") },
-            minLines = 3,
-            modifier = Modifier.fillMaxWidth()
-        )
+        CampoMultilineaConScroll(value = acercaDe, onValueChange = { acercaDe = it }, etiqueta = "Acerca de mí")
+        CampoMultilineaConScroll(value = estudios, onValueChange = { estudios = it }, etiqueta = "Estudios")
+        CampoMultilineaConScroll(value = experiencia, onValueChange = { experiencia = it }, etiqueta = "Experiencia")
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)
@@ -165,6 +150,30 @@ private fun FormularioPerfil(
         }
     }
 }
+
+/** Caja de alto fijo: si el texto no cabe, se desplaza dentro de la caja (con barra) en vez de agrandarla. */
+@Composable
+private fun CampoMultilineaConScroll(value: String, onValueChange: (String) -> Unit, etiqueta: String) {
+    val scroll = rememberScrollState()
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(ALTO_CAJA_TEXTO)
+            .barraDesplazamiento(scroll, HuellaOnSurfaceMuted)
+            .verticalScroll(scroll)
+    ) {
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = { Text(etiqueta) },
+            minLines = LINEAS_MINIMAS_CAJA,
+            modifier = Modifier.fillMaxWidth().heightIn(min = ALTO_CAJA_TEXTO)
+        )
+    }
+}
+
+private val ALTO_CAJA_TEXTO = 140.dp
+private const val LINEAS_MINIMAS_CAJA = 4
 
 @Composable
 private fun CampoTextoPerfil(titulo: String, texto: String) {

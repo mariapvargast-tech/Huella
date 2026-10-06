@@ -52,6 +52,7 @@ import com.jmvr.rescatandohuellas.ui.community.CommunityScreen
 import com.jmvr.rescatandohuellas.ui.about.AboutScreen
 import com.jmvr.rescatandohuellas.ui.components.mostrarProximaEntrega
 import com.jmvr.rescatandohuellas.ui.components.rememberVideoPlayer
+import com.jmvr.rescatandohuellas.ui.help.RedAyudaScreen
 import com.jmvr.rescatandohuellas.ui.home.RescatesScreen
 import com.jmvr.rescatandohuellas.ui.map.MapScreen
 import com.jmvr.rescatandohuellas.ui.profile.ProfileScreen
@@ -120,9 +121,9 @@ fun HuellaApp() {
                     )
                     NavigationDrawerItem(
                         label = { Text("Red de ayuda") },
-                        selected = false,
+                        selected = appState.mostrandoRedAyuda,
                         onClick = {
-                            context.mostrarProximaEntrega()
+                            appState.abrirRedAyuda()
                             scope.launch { drawerState.close() }
                         },
                         icon = { Icon(Icons.Default.Shield, contentDescription = null) }
@@ -198,6 +199,11 @@ fun HuellaApp() {
             if (appState.reportando) {
                 ReportFlowScreen(
                     onFinalizar = { appState.cerrarReportar() },
+                    modifier = Modifier.padding(innerPadding)
+                )
+            } else if (appState.mostrandoRedAyuda) {
+                RedAyudaScreen(
+                    onCerrar = { appState.cerrarRedAyuda() },
                     modifier = Modifier.padding(innerPadding)
                 )
             } else if (appState.mostrandoAcercaDe) {

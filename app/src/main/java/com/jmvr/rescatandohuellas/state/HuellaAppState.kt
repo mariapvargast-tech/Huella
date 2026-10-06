@@ -17,6 +17,8 @@ class HuellaAppState {
     val mapaReportes = MapaReportesManager(SampleData.reportesMapa)
     var mostrandoAcercaDe by mutableStateOf(false)
         private set
+    var mostrandoRedAyuda by mutableStateOf(false)
+        private set
     var urlLanding by mutableStateOf(URL_LANDING_POR_DEFECTO)
 
     var perfil by mutableStateOf(SampleData.perfil)
@@ -25,11 +27,13 @@ class HuellaAppState {
         this.destino = destino
         this.reportando = false
         this.mostrandoAcercaDe = false
+        this.mostrandoRedAyuda = false
     }
 
     fun abrirReportar() {
         reportando = true
         mostrandoAcercaDe = false
+        mostrandoRedAyuda = false
     }
 
     fun cerrarReportar() {
@@ -39,6 +43,17 @@ class HuellaAppState {
     fun abrirAcercaDe() {
         mostrandoAcercaDe = true
         reportando = false
+        mostrandoRedAyuda = false
+    }
+
+    fun abrirRedAyuda() {
+        mostrandoRedAyuda = true
+        reportando = false
+        mostrandoAcercaDe = false
+    }
+
+    fun cerrarRedAyuda() {
+        mostrandoRedAyuda = false
     }
 
     fun cerrarAcercaDe() {
